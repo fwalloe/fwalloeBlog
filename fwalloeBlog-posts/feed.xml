@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.7.3">Jekyll</generator><link href="/feed.xml" rel="self" type="application/atom+xml" /><link href="/" rel="alternate" type="text/html" /><updated>2018-08-28T16:34:37+02:00</updated><id>/</id><title type="html">Fredrik Walløe</title><subtitle>A blog for infosec projects, photography, data-driven journalism and short stories.</subtitle><entry><title type="html">What do you mean I can’t hack that?</title><link href="/about-infosec" rel="alternate" type="text/html" title="What do you mean I can't hack that?" /><published>2018-04-12T19:36:24+02:00</published><updated>2018-04-12T19:36:24+02:00</updated><id>/about-infosec</id><content type="html" xml:base="/about-infosec">&lt;p&gt;I first took an interest in information security when studying Journalism in London. Wikileaks has just made a splash thanks to Chelsea Manning and with her arrest it became clear that if I wanted to be a journalist, I had to find ways to keep sources safe. This led to an extended foray into infosec, through which I learned how to encrypt emails and later discovered Tails – the amnesiac incognito live Linux OS.&lt;/p&gt;
+
+&lt;p&gt;Were it not for the discovery of Stuxnet around the same time, infosec might have remained an auxillary interest. As it were, I had already followed the saga of Iran’s Nuclear Programme for some years after hearing about the country’s history at a peace conference. I was fascinated by the use of malware to achieve political objectives; and as I wrote my first dissertation on the representation of Iran’s Nuclear Programme in the media, I had plenty of excuses to read more about Stuxnet.&lt;/p&gt;
+
+&lt;h2 id=&quot;a-growing-interest&quot;&gt;A growing interest&lt;/h2&gt;
+
+&lt;p&gt;I continued this trend at Goldsmiths University, where I wrote about mass surveillance in the form of the UK’s Snooper’s Charter around the same time as Snowden exposed a similar disregard for human rights by the US.&lt;/p&gt;
+
+&lt;p&gt;Years later this interest had grown sufficiently strong to justify a second Bachelor’s Degree, this time in Information Security – as a way to transition to that industry.&lt;/p&gt;
+
+&lt;p&gt;I now work for an international company where  I focus on incident response, threat hunting and automation. Outside of work I also have an interest in penetration testing.&lt;/p&gt;
+
+&lt;h2 id=&quot;what-to-expect&quot;&gt;What to expect&lt;/h2&gt;
+
+&lt;p&gt;This section is a holding pen for everything loosely related to infosec; that includes scripts, experiments and perhaps some news and commentary.&lt;/p&gt;
+
+&lt;p&gt;The illustration is from a key reinstallation attack, which was the focus of my dissertation at the Norwegian University of Science and Technology(NTNU).&lt;/p&gt;</content><author><name>Fredrik Walløe</name></author><category term="infosec" /><summary type="html">I first took an interest in information security when studying Journalism in London. Wikileaks has just made a splash thanks to Chelsea Manning and with her arrest it became clear that if I wanted to be a journalist, I had to find ways to keep sources safe. This led to an extended foray into infosec, through which I learned how to encrypt emails and later discovered Tails – the amnesiac incognito live Linux OS.</summary></entry><entry><title type="html">Data-driven journalism</title><link href="/about-journalism" rel="alternate" type="text/html" title="Data-driven journalism" /><published>2017-08-25T15:00:00+02:00</published><updated>2017-08-25T15:00:00+02:00</updated><id>/about-journalism</id><content type="html" xml:base="/about-journalism">&lt;p&gt;This section of the blog will contain mainly data-driven journalism, where statics and other open data are used as a central part of journalistic storytelling.&lt;/p&gt;
+
+&lt;p&gt;The photograph used to illustrate this post is from a press event at Electronic Arts in Sweden a few years ago.&lt;/p&gt;</content><author><name>Fredrik Walløe</name></author><category term="journalism" /><summary type="html">This section of the blog will contain mainly data-driven journalism, where statics and other open data are used as a central part of journalistic storytelling.</summary></entry><entry><title type="html">In Autumn</title><link href="/in-autumn" rel="alternate" type="text/html" title="In Autumn" /><published>2017-07-27T06:00:00+02:00</published><updated>2017-07-27T06:00:00+02:00</updated><id>/in-autumn</id><content type="html" xml:base="/in-autumn">&lt;p&gt;An autumn leaf stuck in a fence. Took this when walking to work a few years ago in Oslo.&lt;/p&gt;</content><author><name>Fredrik Walløe</name></author><category term="photography" /><summary type="html">An autumn leaf stuck in a fence. Took this when walking to work a few years ago in Oslo.</summary></entry><entry><title type="html">Affection</title><link href="/affection" rel="alternate" type="text/html" title="Affection" /><published>2017-04-12T19:36:24+02:00</published><updated>2017-04-12T19:36:24+02:00</updated><id>/affection</id><content type="html" xml:base="/affection">&lt;p&gt;I came across this intimate mural of two women in a vibrant part of Stavanger – the 'oil capital' of Norway – right next to a gay bar. Note the crack in the wall, which cuts accross one lover's arm.&lt;/p&gt;</content><author><name>Fredrik Walløe</name></author><category term="photography" /><summary type="html">I came across this intimate mural of two women in a vibrant part of Stavanger – the 'oil capital' of Norway – right next to a gay bar. Note the crack in the wall, which cuts accross one lover's arm.</summary></entry><entry><title type="html">The Norwegian Computer Crime and Data Breach Survey 2016</title><link href="/The-Norwegian-Computer-Crime-and-Data-Breach-Survey-2016" rel="alternate" type="text/html" title="The Norwegian Computer Crime and Data Breach Survey 2016" /><published>2016-09-22T10:18:08+02:00</published><updated>2016-09-22T10:18:08+02:00</updated><id>/The-Norwegian-Computer-Crime-and-Data-Breach-Survey-2016</id><content type="html" xml:base="/The-Norwegian-Computer-Crime-and-Data-Breach-Survey-2016">&lt;p&gt;More than one quarter of Norwegian businesses - 412 out of 1500, or 27% - have experienced undesirable security incidents in the past year.&lt;/p&gt;
+
+&lt;p&gt;The The Norwegian Computer Crime and Data Breach Survey 2016, which I helped write, found that these incidents led to a loss of productivity in 4 out of 10 cases (in the form of lost work hours), but only 2 out of companies 10 report that there have been costs incurred by these incidents. This indicates that businesses lack a full view of the costs incurred by such security incidents, or that they are underestimating the costs. Only 9% of businesses exposed to attacks bring the matter to the police. This implies that considerable statistics remain unrecorded, and that the criminal enterprises carrying out these attacks against Norwegian businesses are effectively immune from prosecution.&lt;/p&gt;
+
+&lt;a href=&quot;https://www.nsr-org.no/getfile.php/Bilder/M%C3%B8rketallsunders%C3%B8kelsen/morketallsundersokelsen_2016_eng.pdf&quot;&gt;You can read more in the English version of the report&lt;/a&gt;</content><author><name>Fredrik Walløe</name></author><category term="infosec" /><category term="journalism" /><summary type="html">More than one quarter of Norwegian businesses - 412 out of 1500, or 27% - have experienced undesirable security incidents in the past year.</summary></entry><entry><title type="html">Ava</title><link href="/ava" rel="alternate" type="text/html" title="Ava" /><published>2012-04-27T10:00:00+02:00</published><updated>2012-04-27T10:00:00+02:00</updated><id>/ava</id><content type="html" xml:base="/ava">&lt;p&gt;Ava flung herself at her mother and waited for Dad to shoot the dog.&lt;/p&gt;
+
+&lt;p&gt;'I won't let bad people get near you. That's why we've got this gun,' Dad had told her.  Ava thought they had bullets, because she had been taught to load a gun and that guns wouldn't fire without them. She waited for her eardrums to sting, but no shot came. &lt;/p&gt;
+
+&lt;p&gt;Four ravens stared from atop a telephone line. &lt;/p&gt;
+
+&lt;p&gt;Dad laughed. He swept the dog up in his arms and carried it back to their four-seat car with dents alongside it and one flat tire. &lt;/p&gt;
+
+&lt;p&gt;'Roger, don't give it too much...' Mum said as he fed the dog and gave it some of their water.  The dog devoured the food. When Dad closed the trunk and it realised there would be no more, it became skittish. Ava thought Dad would let the dog go back to living somewhere among these buildings, with twined plants reaching up the side of them. But he caught the dog by the scruff of its neck, opened the car door and fumbled for something on the floor. They had a coil of rope that Mum kept telling her not to play with, because they might have use for it. Dad got one end of the rope and tied a noose around the dog's neck. Ava frowned. They were always whispering about not enough food when they thought she couldn't hear, so it seemed silly to feed the dog then not let it live. But Dad explained it wasn't a noose that tightened. &lt;/p&gt;
+
+&lt;p&gt;They got back in the car and Ava sat beside the dog in the back seat and saw that Dad was right: no matter how hard she tugged at the rope, the dog would not stop licking her feet.  The dog laid its head in her lap, fur tickling the goose bumps through the tears in her jeans. She decided to call it Kadie.&lt;/p&gt;
+
+&lt;h5 style=&quot;text-align: center;&quot;&gt;*&lt;/h5&gt;
+
+&lt;p&gt;Not a week later they came upon the house where they were staying now. Dad said that their maps showed no cities nearby, but Ava also remembered him saying maps weren't reliable. There weren't any new cities, but some places weren't there anymore, and other cities were abandoned.  Some smaller towns and villages had become self-sustaining communities that made collective decisions. Others had leaders and trade. But cities were desolate places, where gangs roamed. They looked for things to eat, and sometimes traded with other gangs or towns which let them get close enough to barter. &lt;/p&gt;
+
+&lt;p&gt;Her friend Macy had told her tales of gangs who ate humans, but Ava didn't believe her. No-one was that cruel. &lt;/p&gt;
+
+&lt;p&gt;When they arrived at the house, Dad went in with his shotgun and a knife he'd kept in his belt since they left the community. She waited in the car with Mum and wasn't allowed inside until the sun had almost completed its daily journey, and fractals grew on the windshield. &lt;/p&gt;
+
+&lt;p&gt;While Ava explored the house with Kadie, her parents stayed in the kitchen to whisper like they did the night they'd left all of her friends behind. Behind the house she found a fenced garden. The fence had fallen over in some places, but the yard was full of grass and vegetables, apart from a plot in the corner where the plants had been ripped up and the earth overturned. When Kadie began digging there, Dad got awfully annoyed and made her whimper. &lt;/p&gt;
+&lt;p&gt;But that was months ago, and these days Ava and Kadie spent their days playing around the house, and in the garden &amp;#8212 just not near that plot of overturned dirt where the flowers and grass wouldn't grow. They seldom spent time in the room her parents gave her, because it was a boy's room, and had toys she didn't want. &lt;/p&gt;
+
+&lt;p&gt;'They're not mine. We can't throw them away. He'll want to play with them when he gets back,' she said, when her father tried to clear the toys away. Mum ran out of the room and Dad went too quiet. &lt;/p&gt;
+
+&lt;p&gt;When she was sent to bed, Ava let her feet stretch outside the duvet so Kadie could warm them. The dog would snuggle up to her until Ava got annoyed by the foul breath and shoved it back to the foot end.  Ava told Kadie about her friends Macy and Faylinn from the village they left, and about her parents arguing when they thought she was asleep. Kadie lay on the pine floor while Ava made lines in her fur and let her woof at the things that upset her  &amp;#8212 and she understood that this was why her father had brought the dog along.&lt;/p&gt;
+
+&lt;div&gt;&lt;/div&gt;
+&lt;div style=&quot;text-align: center;&quot;&gt;&lt;h5&gt;*&lt;/h5&gt;
+&lt;/div&gt;
+
+&lt;div&gt;&lt;p&gt;The door squeaks shut behind Ava. Dusk moves its graphite pencil over the landscape and the warmth of day seeps out of the ground. Kadie patters beside her. She takes the lantern from its hook outside the door. Kadie rubs against her as she lights it.&lt;em&gt;&lt;br&gt;&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;The dark isn't scary with you here.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;Ava lets a hand trail through the dog's fur. They climb together through a gap in the fence. She lets Kadie lead her through the darkness, with the sun tucked away behind the hilltops and the moon veiled by clouds. Her eyes take a while to adapt. Dad told them to stay close, but the weeks spent around the house have made Ava restless and eager to explore. They get to the road and begin to follow the crumbled asphalt to the nearest town.&lt;/p&gt;
+
+&lt;div style=&quot;text-align: center;&quot;&gt;&lt;h5&gt;*&lt;/h5&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Ava takes off her shoes when they reach the street outside town, and walks barefoot to the first row of shops; the windows lie shattered in the street. The town seems deserted. Silos stick up from behind a row of buildings and there's a water tower with stairs coiled around its legs.&lt;/p&gt;
+
+&lt;p&gt;'Can you climb those?' she says to Kadie. The dog licks her right hand. Ava giggles. They leap over a flowerbed with no plants in it, pass a row of cars and begin to climb the stairs together. Wind creeps through the sleeves of her jacket; although the house isn't far away, she can't see its lights anymore. &lt;/p&gt;
+
+&lt;p&gt;Kadie pants beside her. They reach the top of the water tower as the moon escapes the clouds  &amp;#8212 the top is a dome encircled by railings. Ava lets her bare feet dangle over the edge and leans back so she can see the moon. Kadie puts her head in Ava's lap. &lt;/p&gt;
+
+&lt;p&gt;She watches clouds pass by the moon; some linger - as though curious about this glare in the night sky &amp;#8212 but most rush past. &lt;em&gt;&lt;br&gt;&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;They're chasing the sun.&lt;/p&gt;
+
+&lt;p&gt;Ava's eyes wander over the lifeless town, the greenhouses outside it, and the rocky hillside where the moonlight weaves moving carpets through the passing clouds. She spots a silhouette on the carpet. It moves, like a cockroach down the mountainside, climbing over rocks, shifting side to side as if stopping to sense its environment. What is it?&lt;/p&gt;
+
+&lt;p&gt;Kadie growls.&lt;/p&gt;
+
+&lt;p&gt;'Shush, Kadie.' She slides a hand around the dog's neck and holds it close as the shape climbs down the hillside and prowls towards town. &lt;/p&gt;
+
+&lt;p&gt;'Sometimes people eat people. They take young women with them, and their parents never hear from them again.' Macy said her older brother told her things like that.&lt;/p&gt;
+
+&lt;p&gt;'It's not like that sweetie.' Mum had refused to tell Ava why the women were taken. 'You're too young  &amp;#8212 they don't take the young ones.' Her voice broke like that vase Kadie had swept to the floor with her tail, last week. Ava wanted Dad to be there to hold Mum, but he wasn't, so she did. &lt;/p&gt;
+
+&lt;p&gt;The shape becomes a man. &lt;/p&gt;
+
+&lt;p&gt;He walks over the asphalt where Ava took her shoes off, stops and combs a hand through what hair he has left. &lt;/p&gt;
+
+&lt;p&gt;Ava gets down on her belly. Trees sway beside the road that leads out of town.&lt;/p&gt;
+
+&lt;p&gt;'Lie down Kadie &amp;#8212 &lt;em&gt;now.&lt;/em&gt;' &lt;/p&gt;
+
+&lt;p&gt;She swallows. Kadie whines and lies down. As Ava reaches out to soothe the dog, her hand touches something and recoils. &lt;/p&gt;
+
+&lt;p&gt;Her left shoe falls from the tower and thuds against the asphalt below. &lt;/p&gt;
+
+&lt;p&gt;Her hand trembles as the man comes towards the tower, detaching a chain from his belt. He stops beneath the tower. &lt;/p&gt;
+
+&lt;p&gt;Above them the moon is full. Kadie's teeth glisten. &lt;/p&gt;
+
+&lt;p&gt;Ava buries her head in the fur. &lt;/p&gt;</content><author><name>Fredrik Walløe</name></author><category term="fiction" /><summary type="html">Ava flung herself at her mother and waited for Dad to shoot the dog.</summary></entry></feed>
