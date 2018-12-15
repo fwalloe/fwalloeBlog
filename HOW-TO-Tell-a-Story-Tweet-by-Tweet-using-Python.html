@@ -1,0 +1,1008 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <!-- Document Settings -->
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    <!-- Base Meta -->
+    <!-- dynamically fixing the title for tag/author pages -->
+
+
+
+    <title>HOW TO Tell a Story Tweet by Tweet using Python</title>
+    <meta name="HandheldFriendly" content="True" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Styles'n'Scripts -->
+    <link rel="stylesheet" type="text/css" href="/assets/built/screen.css" />
+    <link rel="stylesheet" type="text/css" href="/assets/built/screen.edited.css" />
+    <link rel="stylesheet" type="text/css" href="/assets/built/syntax.css" />
+    <!-- highlight.js -->
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css">
+    <style>.hljs { background: none; }</style>
+
+    <!-- This tag outputs SEO meta+structured data and other important settings -->
+    <meta name="description" content="A blog for infosec projects, photography, data-driven journalism and short stories." />
+    <link rel="shortcut icon" href="/assets/images/favicon.png" type="image/png" />
+    <link rel="canonical" href="/HOW-TO-Tell-a-Story-Tweet-by-Tweet-using-Python" />
+    <meta name="referrer" content="no-referrer-when-downgrade" />
+
+     <!--title below is coming from _includes/dynamic_title-->
+    <meta property="og:site_name" content="Fredrik Walløe" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="HOW TO Tell a Story Tweet by Tweet using Python" />
+    <meta property="og:description" content="I got curious the other day about whether it would be tricky to parse a long text into tweet-form and automatically publish it to Twitter every hour. The answer turned out to be ‘no, not particularly’, but this write-up is for those who want to do something similar, or who" />
+    <meta property="og:url" content="/HOW-TO-Tell-a-Story-Tweet-by-Tweet-using-Python" />
+    <meta property="og:image" content="/assets/images/general/stackOfBooks.jpg" />
+    <meta property="article:publisher" content="https://www.facebook.com/Journalist.Fredrik.Walloe" />
+    <meta property="article:author" content="https://www.facebook.com/Journalist.Fredrik.Walloe" />
+    <meta property="article:published_time" content="2018-12-15T14:16:55+01:00" />
+    <meta property="article:modified_time" content="2018-12-15T14:16:55+01:00" />
+    <meta property="article:tag" content="Infosec" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="HOW TO Tell a Story Tweet by Tweet using Python" />
+    <meta name="twitter:description" content="I got curious the other day about whether it would be tricky to parse a long text into tweet-form and automatically publish it to Twitter every hour. The answer turned out to be ‘no, not particularly’, but this write-up is for those who want to do something similar, or who" />
+    <meta name="twitter:url" content="/" />
+    <meta name="twitter:image" content="/assets/images/general/stackOfBooks.jpg" />
+    <meta name="twitter:label1" content="Written by" />
+    <meta name="twitter:data1" content="Fredrik Walløe" />
+    <meta name="twitter:label2" content="Filed under" />
+    <meta name="twitter:data2" content="Infosec" />
+    <meta name="twitter:site" content="@fwalloe" />
+    <meta name="twitter:creator" content="@fwalloe" />
+    <meta property="og:image:width" content="1400" />
+    <meta property="og:image:height" content="933" />
+
+    <script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Website",
+    "publisher": {
+        "@type": "Organization",
+        "name": "Fredrik Walløe",
+        "logo": "/assets/images/blog-icon.png"
+    },
+    "url": "/HOW-TO-Tell-a-Story-Tweet-by-Tweet-using-Python",
+    "image": {
+        "@type": "ImageObject",
+        "url": "/assets/images/general/stackOfBooks.jpg",
+        "width": 2000,
+        "height": 666
+    },
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "/HOW-TO-Tell-a-Story-Tweet-by-Tweet-using-Python"
+    },
+    "description": "I got curious the other day about whether it would be tricky to parse a long text into tweet-form and automatically publish it to Twitter every hour. The answer turned out to be ‘no, not particularly’, but this write-up is for those who want to do something similar, or who"
+}
+    </script>
+
+    <!-- <script type="text/javascript" src="https://demo.ghost.io/public/ghost-sdk.min.js?v=724281a32e"></script>
+    <script type="text/javascript">
+    ghost.init({
+    	clientId: "ghost-frontend",
+    	clientSecret: "f84a07a72b17"
+    });
+    </script> -->
+
+    <meta name="generator" content="Jekyll 3.6.2" />
+    <link rel="alternate" type="application/rss+xml" title="HOW TO Tell a Story Tweet by Tweet using Python" href="/feed.xml" />
+
+
+</head>
+<body class="post-template">
+
+    <div class="site-wrapper">
+        <!-- All the main content gets inserted here, index.hbs, post.hbs, etc -->
+        <!-- default -->
+
+<!-- The tag above means: insert everything in this file
+into the {body} of the default.hbs template -->
+
+<header class="site-header outer">
+    <div class="inner">
+        <nav class="site-nav">
+    <div class="site-nav-left">
+        
+            
+                <a class="site-nav-logo" href="/"><img src="/assets/images/blog-icon.png" alt="Fredrik Walløe" /></a>
+            
+        
+        
+            <ul class="nav" role="menu">
+    <li class="nav-about" role="menuitem"><a href="/about/">About</a></li>
+    <li class="nav-journalism" role="menuitem"><a href="/tag/journalism/">journalism</a></li>
+<li class="nav-infosec" role="menuitem"><a href="/tag/infosec/">infosec</a></li>
+<li class="nav-fiction" role="menuitem"><a href="/tag/fiction/">fiction</a></li>
+<li class="nav-photography" role="menuitem"><a href="/tag/photography/">photography</a></li>
+
+</ul>
+
+        
+    </div>
+    <div class="site-nav-right">
+        <div class="social-links">
+            
+                <a class="social-link social-link-fb" href="https://facebook.com/Journalist.Fredrik.Walloe" target="_blank" rel="noopener"><svg xmlns="https://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M19 6h5V0h-5c-3.86 0-7 3.14-7 7v3H8v6h4v16h6V16h5l1-6h-6V7c0-.542.458-1 1-1z"/></svg>
+</a>
+            
+            
+                <a class="social-link social-link-tw" href="https://twitter.com/fwalloe" target="_blank" rel="noopener"><svg xmlns="https://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M30.063 7.313c-.813 1.125-1.75 2.125-2.875 2.938v.75c0 1.563-.188 3.125-.688 4.625a15.088 15.088 0 0 1-2.063 4.438c-.875 1.438-2 2.688-3.25 3.813a15.015 15.015 0 0 1-4.625 2.563c-1.813.688-3.75 1-5.75 1-3.25 0-6.188-.875-8.875-2.625.438.063.875.125 1.375.125 2.688 0 5.063-.875 7.188-2.5-1.25 0-2.375-.375-3.375-1.125s-1.688-1.688-2.063-2.875c.438.063.813.125 1.125.125.5 0 1-.063 1.5-.25-1.313-.25-2.438-.938-3.313-1.938a5.673 5.673 0 0 1-1.313-3.688v-.063c.813.438 1.688.688 2.625.688a5.228 5.228 0 0 1-1.875-2c-.5-.875-.688-1.813-.688-2.75 0-1.063.25-2.063.75-2.938 1.438 1.75 3.188 3.188 5.25 4.25s4.313 1.688 6.688 1.813a5.579 5.579 0 0 1 1.5-5.438c1.125-1.125 2.5-1.688 4.125-1.688s3.063.625 4.188 1.813a11.48 11.48 0 0 0 3.688-1.375c-.438 1.375-1.313 2.438-2.563 3.188 1.125-.125 2.188-.438 3.313-.875z"/></svg>
+</a>
+            
+        </div>
+<!-- REMOVE THIS to enable subscriptions
+        
+    </div>
+-->
+</nav>
+
+    </div>
+</header>
+
+<!-- Everything inside the #post tags pulls data from the post -->
+<!-- #post -->
+
+<main id="site-main" class="site-main outer" role="main">
+    <div class="inner">
+
+        <article class="post-full post infosec ">
+
+            <header class="post-full-header">
+                <section class="post-full-meta">
+                    <time class="post-full-meta-date" datetime="15 December 2018">15 December 2018</time>
+                    
+                        <span class="date-divider">/</span>
+                        
+                            
+                               <a href='/tag/infosec/'>INFOSEC</a>
+                            
+                        
+                    
+                </section>
+                <h1 class="post-full-title">HOW TO Tell a Story Tweet by Tweet using Python</h1>
+            </header>
+
+            
+            <figure class="post-full-image" style="background-image: url(/assets/images/general/stackOfBooks.jpg)">
+            </figure>
+            
+
+            <section class="post-full-content">
+                <div class="kg-card-markdown">
+                    <p>I got curious the other day about whether it would be tricky to parse a long text into tweet-form and automatically publish it to Twitter every hour. The answer turned out to be ‘no, not particularly’, but this write-up is for those who want to do something similar, or who are merely curious about how an afternoon project like this takes from. The source code for the project presented here is also available on <a href="https://github.com/fwalloe/tweetBooks">GitHub</a></p>
+
+<p>The end result of this afternoon project is the program tweetBooks, which consist of these 5 Python files:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>- downloadBookByURL.py  (downloads text)
+- fitTextInTweets.py    (parses text) 
+- publishFromCron.py    (publish tweet using sys.argv)
+- publishToTwitter.py   (publish tweet interactively)
+- tweetBooks.py         (a command-line interface for tweetBooks)
+</code></pre></div></div>
+
+<h1 id="step-1-download-a-text">Step 1: Download a text</h1>
+<p>The first step is to download a book (or other text). I chose to make a function that can do this. The downloadByURL function in downloadBooksByURL.py takes two arguments: a one-word project name and the URL that it should download the text from. It then uses the Requests package to download this file. This downloaded text will be given a name that is based on the project name and saved to disk. Note that ‘unparsed’ will be part of the file name, because the text that was downloaded must be parsed before it can be tweeted.</p>
+
+<p>The debug function isn’t used here, but is present because I use a Python script to… create other Python scripts based on a template, and the ever-useful debug function is part of that template.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#!/usr/bin/python</span>
+
+<span class="c">####</span>
+<span class="c">##</span>
+<span class="c">## downloadBookByURL.py: downloads a text and saves it to file</span>
+<span class="c">## Created by: Fredrik Walloe</span>
+<span class="c">## Creation date: 14-12-2018</span>
+<span class="c">## Version: 1.0</span>
+<span class="c">## Status: works as expected with no known errors, but there are some static values that should be set by sys.argv </span>
+<span class="c">##</span>
+<span class="c">## Usage: use tweetBooks.py -d to download a file </span>
+<span class="c">##</span>
+<span class="c">####</span>
+
+<span class="c">#### IMPORTS ####</span>
+<span class="kn">import</span> <span class="nn">requests</span>
+<span class="kn">import</span> <span class="nn">os</span>
+
+<span class="c">#### VARIABLES ####</span>
+<span class="n">debugMode</span> <span class="o">=</span> <span class="bp">False</span>
+
+<span class="c">#### FUNCTIONS ####</span>
+
+<span class="c"># prints text passed to it when debugMode is set to True</span>
+<span class="k">def</span> <span class="nf">debug</span><span class="p">(</span><span class="n">text</span><span class="p">):</span>
+   <span class="k">if</span> <span class="n">debugMode</span> <span class="ow">is</span> <span class="bp">True</span><span class="p">:</span>
+       <span class="k">print</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+
+<span class="c">#### MAIN ####</span>
+<span class="k">def</span> <span class="nf">downloadByURL</span><span class="p">(</span><span class="n">projectName</span><span class="p">,</span> <span class="n">URL</span><span class="p">):</span>
+    <span class="n">url</span> <span class="o">=</span> <span class="n">URL</span>
+    <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+
+    <span class="n">fileName</span> <span class="o">=</span> <span class="s">"unparsed"</span> <span class="o">+</span> <span class="n">projectName</span> <span class="o">+</span> <span class="s">"/"</span> <span class="o">+</span> <span class="n">projectName</span> <span class="o">+</span> <span class="s">".txt"</span>
+
+    <span class="c"># create the path if neccessary</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">fileName</span><span class="p">),</span> <span class="n">exist_ok</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+
+    <span class="c"># place the project in a separate folder</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">fileName</span><span class="p">,</span> <span class="s">"w+"</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h1 id="step-2-parse-the-text">Step 2: Parse the text</h1>
+
+<p>Each tweet should be a maximum of 140 characters long. Tweets shold also be numbered (to make it easier to read the text in order) and a hashtag.</p>
+
+<p>The fitTextToTweet function takes care of this. The user must supply two arguments: the same project name that was used to for the downloadByURL function and a hashtag. The project name will be automatically converted to file paths as needed. Say we downloaded Moby Dick using the downloadByURL function and gave it the project name MobyDick. The text will then have been saved to MobyDick/unparsedMobyDick.txt. When the user passes the same project name to fitTextToTweet through tweetBooks.py, the project name will be used to recreate the file path. This happens in tweetBooks.py, which means fitTextToTweet receives a file path.</p>
+
+<p>A try-catch at the start of the function will ensure that the program exits if the unprased text file cannot be found; if this happens it likely means that the user either hasn’t downloaded a file yet, or provided the wrong project name to tweetBooks.py.</p>
+
+<p>Processed tweets will be saved in a list and then written to a file once the whole text has been parsed. For very long files it may make more sense to append each tweet to file when it has been processes rather than keep everything stored in memory, but that should not be a problem for books of a normal length.</p>
+
+<p>In order to parse the tweets, the function will go through the text line by line. Some minor parsing is done to each line to get rid of multiple consecutive spaces. But the central task of this function is to checks whether a line can fit into a tweet. It first counts the number of characters in the line, and then sees whether that number is larger than the characters that can fit in a tweet. Note that this number is less than 140, because the tweet will also contain a hashtag, a tweet count, the formatting around the tweet count (3 characters) and two spaces (2 characters).</p>
+
+<p>As an example, after being processed by this function the first line of Alice in Wonderland would look something like this:</p>
+
+<p><em>Alice was beginning to get very tired of sitting by her sister on the bank (1/) #Wonderland</em></p>
+
+<p>If the line can fit in a tweet without modifications the function checks whether it is less than 60 characters (short lines can be annoying too).</p>
+
+<p>Lines that are neither too long nor too short to fit in a tweet will be added to the list of tweets after the tweet number and hashtag has been added to the end of the line.</p>
+
+<p>If a line is too long, the last word will be chopped of and stored in the lastLine variable. The function will then check if the line minus the last word can fit in the tweet. If it still cannot fit, another word is chopped off the end… Likewise, if a line is too short, the whole line is added to lastLine. The function then proceeds to the next line. Before it begins to parse that line, the words in lastLine are added to the start of the line. And then the function continues, checking whether the line fits into a tweet and chopping words off as necessary.</p>
+
+<p>When all the lines have been processed, the parsed tweets are saved to a separate file. This file has the same name as the unparsed file, only without ‘unparsed’ as part of the filename.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#!/usr/bin/python</span>
+
+<span class="c">####</span>
+<span class="c">##</span>
+<span class="c">## fitTextInTweets.py: parse a text into tweets</span>
+<span class="c">## Created by: Fredrik Walloe</span>
+<span class="c">## Creation date: 14-12-2018</span>
+<span class="c">## Version: 1.0</span>
+<span class="c">## Status: works as expected with no known errors</span>
+<span class="c">##</span>
+<span class="c">## Usage: run tweetBooks.py --fit and follow the instructions</span>
+<span class="c">##</span>
+<span class="c">####</span>
+
+<span class="c">#### IMPORTS ####</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+
+<span class="c">#### VARIABLES ####</span>
+<span class="n">debugMode</span> <span class="o">=</span> <span class="bp">False</span>
+
+<span class="c">#### FUNCTIONS ####</span>
+
+<span class="c"># prints text passed to it when debugMode is set to True</span>
+<span class="k">def</span> <span class="nf">debug</span><span class="p">(</span><span class="n">text</span><span class="p">):</span>
+   <span class="k">if</span> <span class="n">debugMode</span> <span class="ow">is</span> <span class="bp">True</span><span class="p">:</span>
+       <span class="k">print</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">fitTextToTweet</span><span class="p">(</span><span class="n">filePath</span><span class="p">,</span> <span class="n">hashtag</span><span class="p">):</span>
+
+    <span class="k">try</span><span class="p">:</span>   
+        <span class="n">text</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">filePath</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s">"/"</span><span class="p">,</span> <span class="s">"/unparsed"</span><span class="p">),</span> <span class="s">"r"</span><span class="p">)</span>        <span class="c"># the unparsed text was downloaded to a file located in projectName/unparsedProjectName</span>
+    <span class="k">except</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">"Unable to open project file. Make sure you specified an existing project or use the --download option to create a new project. Project names are case-sensitive"</span><span class="p">)</span>
+        <span class="n">sys</span><span class="o">.</span><span class="nb">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+
+    <span class="n">tweets</span> <span class="o">=</span> <span class="p">[]</span>             <span class="c"># save tweets to a list</span>
+    <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span>                   <span class="c"># the tweet number</span>
+    <span class="n">lastLine</span> <span class="o">=</span> <span class="s">""</span>           <span class="c"># when a line must be cut down to fit into a tweet, the cut words are stored in this variable</span>
+        
+    <span class="c"># loop through the text and make each line fit into a tweet</span>
+    <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">text</span><span class="p">:</span>
+   
+        <span class="c"># if the line is not empty</span>
+        <span class="k">if</span> <span class="nb">str</span><span class="p">(</span><span class="n">line</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">():</span>
+
+            <span class="n">line</span> <span class="o">=</span> <span class="n">lastLine</span> <span class="o">+</span> <span class="s">" "</span> <span class="o">+</span> <span class="n">line</span> <span class="c"># text that didn't fit in the last tweet should be part of the next tweet</span>
+     
+            <span class="n">lastLine</span> <span class="o">=</span> <span class="s">""</span>
+            <span class="n">line</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s">"</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="s">""</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>     <span class="c"># weird spacing doesn't work in tweet-form        </span>
+            <span class="n">line</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s">"  "</span><span class="p">,</span> <span class="s">" "</span><span class="p">)</span> <span class="c"># if mashing up lastLine and line together introduces and extra space</span>
+            <span class="n">line</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s">"   "</span><span class="p">,</span> <span class="s">" "</span><span class="p">)</span> <span class="c"># if mashing up lastLine and line together introduces and extra space</span>
+            <span class="n">line</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s">"    "</span><span class="p">,</span> <span class="s">" "</span><span class="p">)</span> <span class="c"># if mashing up lastLine and line together introduces and extra space</span>
+
+            <span class="c"># if it's longer than 120 characters it's neccessary to manipulate it to make it fit a tweet</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">line</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">120</span><span class="p">:</span>
+                        
+                <span class="c"># see if it's enough to cut one word</span>
+                <span class="k">while</span> <span class="nb">len</span><span class="p">(</span><span class="n">line</span><span class="p">)</span> <span class="o">&gt;</span> <span class="p">(</span><span class="mi">140</span> <span class="o">-</span> <span class="nb">len</span><span class="p">(</span><span class="n">hashtag</span><span class="p">)</span> <span class="o">-</span> <span class="nb">len</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span> <span class="o">-</span> <span class="nb">len</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">))):</span>    <span class="c"># to figure out how many characters we can fit into a tweet we must take the max tweet length of 140 characters, minus the hashtag, tweet number and the three charactes used to encapsulate the tweet number</span>
+                    
+                    <span class="c"># Save the last word</span>
+                    <span class="n">lastLine</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">rsplit</span><span class="p">(</span><span class="s">' '</span><span class="p">,</span> <span class="mi">1</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="s">" "</span> <span class="o">+</span> <span class="n">lastLine</span>    
+
+                    <span class="c"># keep the line minus the last word</span>
+                    <span class="n">line</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">rsplit</span><span class="p">(</span><span class="s">' '</span><span class="p">,</span> <span class="mi">1</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+
+            <span class="k">elif</span> <span class="nb">str</span><span class="p">(</span><span class="s">"the end"</span><span class="p">)</span> <span class="ow">in</span> <span class="n">line</span><span class="o">.</span><span class="n">lower</span><span class="p">():</span>
+                <span class="n">tweets</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">line</span> <span class="o">+</span> <span class="s">" ("</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="o">+</span> <span class="s">"/) #"</span> <span class="o">+</span> <span class="n">hashtag</span> <span class="o">+</span> <span class="s">"</span><span class="se">\n</span><span class="s">"</span><span class="p">)</span>
+                
+
+            <span class="c"># very short sentences can be annoying too</span>
+            <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">line</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">60</span><span class="p">:</span>
+                <span class="n">lastLine</span> <span class="o">=</span> <span class="n">line</span>
+
+            <span class="c"># can fit in a tweet as-is</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">debug</span><span class="p">(</span><span class="s">"Tweet ready: "</span> <span class="o">+</span> <span class="n">line</span> <span class="o">+</span> <span class="s">" ("</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="o">+</span> <span class="s">"/) #"</span> <span class="o">+</span> <span class="n">hashtag</span><span class="p">)</span>
+                <span class="n">tweets</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">line</span> <span class="o">+</span> <span class="s">" ("</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="o">+</span> <span class="s">"/) #"</span> <span class="o">+</span> <span class="n">hashtag</span> <span class="o">+</span> <span class="s">"</span><span class="se">\n</span><span class="s">"</span><span class="p">)</span>
+                <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+                   
+
+    <span class="k">for</span> <span class="n">tweet</span> <span class="ow">in</span> <span class="n">tweets</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="n">tweet</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s">"</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="s">""</span><span class="p">))</span>
+
+
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filePath</span><span class="p">,</span> <span class="s">"w+"</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">tweet</span> <span class="ow">in</span> <span class="n">tweets</span><span class="p">:</span>
+            <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">tweet</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h1 id="step-3-tweet">Step 3: Tweet</h1>
+
+<p>Once the text has been processed, it’s time to post the tweets on Twitter. This can be done with a cron job, manually from the command line or through the tweetBooks.py command-line interface.</p>
+
+<p>For this to work, it is necessary to create a Buffer account and then to create an application in Buffer. Next, all the API values must be hard-coded into the correct variables in this function. Alternatively, the Twitter API can be used, but this may become problematic if you want to create a separate Twitter account for your project as the Twitter API requires a phone number that you may have already registered to another account. This may be a non-issue, but I opted for Buffer as it also makes it possible to post to other social media platforms.</p>
+
+<p>The publishToTwitter function takes a single argument, which is the project name that we’ve used before. As previously mentioned each tweet was assigned a tweet number during the parsing stage. If we want to publish the story in the correct order, we should start with tweet number 1 and then proceed with number 2 and so on. We keep track of this information by writing the number of a last tweet that was published to a file named <em>lineReached</em> in the project folder. This file will be created automatically the first time the publishToTwitter function runs. The first thing the function does is read from this file, find the tweet number, add 1 to that number (because we’re looking for the next tweet to publish) and then save that number to a variable.</p>
+
+<p>It then begins to loop through the file that contains the parsed tweets. For each line it will use regular expression to find the tweet number and then compare it to the tweet number we saved to the variable. When these numbers match we’ve found the next tweet that should be published. The functions saves the tweet to a variable.</p>
+
+<p>Now that it has the tweet, it sends the tweet to Buffer (using its API), which in turn publishes it.</p>
+
+<p>Because the ‘now’ attribute is set in the POST request to Buffer, the tweet will be published immediately, but it is also possible to schedule the tweet for publication at a later time.</p>
+
+<p>After the tweet has been published, we update the lastReached file with the number of the tweet we just published. However, this only happens if the attempt to send the tweet to Buffer gets the response code 200, which indicates it was successful. Otherwise, no information is written to the file. This ensures that when the publishToTwitter functions runs again, the next tweet will be published.</p>
+
+<p>Lastly, we write a message to a log: if our attempt to publish the tweet got the response code 200, the message ‘published tweet successfully’ will be written to the file, prepended by the date and time. A successful publication should look something like <em>15/12/2018 14:53:24 -&gt; published tweet successfully</em> in the log. The log is a quick way to check when a problem occurred if you discover that a cron job has failed.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#!/usr/bin/python</span>
+
+<span class="c">####</span>
+<span class="c">##</span>
+<span class="c">## publishToTwitter.py: gets a prepared tweet from file, logs into a Twitter account, publishes the tweet and then writes the tweet number to file</span>
+<span class="c">## Created by: Fredrik Walloe</span>
+<span class="c">## Creation date: 14-12-2018</span>
+<span class="c">## Version: 1.0</span>
+<span class="c">## Status: works as expected with no known errors</span>
+<span class="c">##</span>
+<span class="c">## Usage: after running downloadBookByURL.py and fitTextInTweets.py, publishToTwitter.py can be used to publish the tweets to twitter</span>
+<span class="c">##</span>
+<span class="c">####</span>
+
+<span class="c">#### IMPORTS ####</span>
+<span class="kn">import</span> <span class="nn">requests</span>         <span class="c"># used to send tweets to Buffer, which then forwards the tweets to Twitter </span>
+<span class="kn">import</span> <span class="nn">re</span>               <span class="c"># used to find the tweet number</span>
+<span class="kn">import</span> <span class="nn">datetime</span>         <span class="c"># used when writing to a log that keeps track of whether publications have been successful. </span>
+<span class="kn">import</span> <span class="nn">sys</span>              <span class="c"># used to quit if the file that should be read from cannot be found</span>
+
+<span class="c">#### VARIABLES ####</span>
+<span class="n">debugMode</span> <span class="o">=</span> <span class="bp">False</span>
+<span class="n">lineReached</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">tweet</span> <span class="o">=</span> <span class="s">""</span>
+
+<span class="n">clientID</span> <span class="o">=</span> <span class="s">""</span>                       <span class="c"># Buffer client ID, which can be found under 'registered apps' after you create an application</span>
+<span class="n">clientSecret</span> <span class="o">=</span> <span class="s">""</span>                   <span class="c"># Buffer client Secret, which will be sent by email after you create an application</span>
+<span class="n">redirectURI</span> <span class="o">=</span> <span class="s">""</span>                    <span class="c"># Buffer redirect, which can be found under 'registered apps' after you create an application; a default redirect was used here</span>
+<span class="n">bufferToken</span> <span class="o">=</span> <span class="s">""</span>                    <span class="c"># Buffer Token, which can be found under 'registered apps' after you create an application; if you need more than one a separate authentication process is required          </span>
+<span class="n">bufferProfileID</span> <span class="o">=</span> <span class="s">""</span>                <span class="c"># Can be found in the URL when you navigate to your Buffer profile</span>
+
+<span class="c">#### FUNCTIONS d####</span>
+
+<span class="c"># prints text passed to it when debugMode is set to True</span>
+<span class="k">def</span> <span class="nf">debug</span><span class="p">(</span><span class="n">text</span><span class="p">):</span>
+   <span class="k">if</span> <span class="n">debugMode</span> <span class="ow">is</span> <span class="bp">True</span><span class="p">:</span>
+       <span class="k">print</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">publishToTwitter</span><span class="p">(</span><span class="n">projectName</span><span class="p">):</span>
+    <span class="c"># As the script is intended to be run hourly / daily it makes sense to save the progress to file</span>
+    <span class="n">getLineReached</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">projectName</span> <span class="o">+</span> <span class="s">"/lineReached"</span><span class="p">,</span> <span class="s">"r"</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">getLineReached</span><span class="p">:</span>
+        <span class="n">lineReached</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s">"</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="s">""</span><span class="p">)</span>
+
+    <span class="c"># Tweets are retrieved from this file </span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">getTweet</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">projectName</span> <span class="o">+</span> <span class="s">"/"</span> <span class="o">+</span> <span class="n">projectName</span> <span class="o">+</span> <span class="s">".txt"</span><span class="p">,</span> <span class="s">"r"</span><span class="p">)</span>
+    <span class="k">except</span><span class="p">:</span> 
+        <span class="k">print</span><span class="p">(</span><span class="s">"Failed to open file that should contain the parsed tweets for this project. If you have not yet used to --download and --fit options, use those first and then try this option again. If yout've already run those options, verify that you entered the correct project name (note that project names are case-sensitive."</span><span class="p">)</span>
+        <span class="n">sys</span><span class="o">.</span><span class="nb">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+
+    <span class="c"># loop through each of the prepared tweets </span>
+    <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">getTweet</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">():</span>
+
+            <span class="c"># Each tweet is numbered in the format (somenumber/).  </span>
+            <span class="n">tweetNumberPattern</span> <span class="o">=</span> <span class="s">r'(\(\d*\/\))'</span>
+            <span class="n">tweetNumber</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="n">tweetNumberPattern</span><span class="p">,</span> <span class="n">line</span><span class="p">)</span>
+            <span class="n">tweetNumber</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">tweetNumber</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">"/)"</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">"("</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+            
+            <span class="c"># find the </span>
+            <span class="k">if</span> <span class="nb">int</span><span class="p">(</span><span class="n">lineReached</span><span class="p">)</span> <span class="o">==</span> <span class="nb">int</span><span class="p">(</span><span class="n">tweetNumber</span><span class="p">):</span>
+                <span class="n">debug</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
+                <span class="n">tweet</span> <span class="o">=</span> <span class="n">line</span>
+                <span class="k">break</span>
+
+    <span class="s">"""
+        Buffer requires you to a) create an account b) create an application, c) get a token (requires a separate GET request if you need more than one) and d) the information below supplied as data in the POST request: 
+        - a profile ID (found in the URL on your Buffer profile)
+        - the text that should be shared; a tweet in this case
+        - 'now' is optional and means that the tweet will be shared immediately
+        - client ID, which can also be found after creating an 
+    """</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="p">{</span><span class="s">"profile_ids"</span><span class="p">:</span> <span class="n">bufferProfileID</span><span class="p">,</span> <span class="s">"text"</span><span class="p">:</span> <span class="n">tweet</span><span class="p">,</span> <span class="s">"now"</span><span class="p">:</span> <span class="s">'now'</span><span class="p">,</span> <span class="s">"client_id"</span><span class="p">:</span> <span class="n">clientID</span><span class="p">,</span>
+                <span class="s">"client_secret"</span><span class="p">:</span> <span class="n">clientSecret</span><span class="p">,</span>
+                <span class="s">"redirect_uri"</span><span class="p">:</span> <span class="n">redirectURI</span><span class="p">,</span>
+                <span class="s">"access_token"</span><span class="p">:</span> <span class="n">bufferToken</span>
+    <span class="p">}</span>
+
+    <span class="c"># buffer also requires that the content-type is set like this</span>
+    <span class="n">headers</span> <span class="o">=</span> <span class="p">{</span><span class="s">"Content-Type"</span><span class="p">:</span> <span class="s">"application/x-www-form-urlencoded"</span><span class="p">}</span>
+
+
+
+    <span class="c"># connect to Buffer and publish the tweet</span>
+    <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s">'https://api.bufferapp.com/1/updates/create.json'</span><span class="p">,</span> <span class="n">headers</span> <span class="o">=</span> <span class="n">headers</span><span class="p">,</span> <span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="p">)</span>
+
+    <span class="c"># change debugMode to True to print these</span>
+    <span class="n">debug</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
+    <span class="n">debug</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
+    <span class="n">debug</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">reason</span><span class="p">)</span>
+    <span class="n">debug</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">)</span>
+    <span class="n">debug</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">cookies</span><span class="p">)</span>
+
+    <span class="c"># write the last line to file</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">projectName</span> <span class="o">+</span> <span class="s">"/lineReached"</span><span class="p">,</span> <span class="s">"w"</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="c"># only update lineReached if the attempt to publish the tweet succeeded </span>
+        <span class="k">if</span> <span class="nb">str</span><span class="p">(</span><span class="mi">200</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">str</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">):</span>
+            <span class="n">lineReached</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">lineReached</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>                <span class="c"># because the tweet was published the last reach tweet value should increment by one</span>
+            <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">lineReached</span><span class="p">))</span>
+
+
+    <span class="c"># keep a log of successful / unsuccesful attempts to tweet; can be used to figure out when a problem occurred. </span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s">"publicationLog.txt"</span><span class="p">,</span> <span class="s">"a"</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="n">now</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span>
+        <span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">str</span><span class="p">(</span><span class="mi">200</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">str</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">):</span>
+            <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">now</span><span class="o">.</span><span class="n">day</span><span class="p">)</span> <span class="o">+</span> <span class="s">"/"</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">now</span><span class="o">.</span><span class="n">month</span><span class="p">)</span> <span class="o">+</span> <span class="s">"/"</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">now</span><span class="o">.</span><span class="n">year</span><span class="p">)</span> <span class="o">+</span> <span class="s">" "</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">now</span><span class="o">.</span><span class="n">hour</span><span class="p">)</span> <span class="o">+</span> <span class="s">":"</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">now</span><span class="o">.</span><span class="n">minute</span><span class="p">)</span> <span class="o">+</span> <span class="s">":"</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">now</span><span class="o">.</span><span class="n">second</span><span class="p">)</span> <span class="o">+</span> <span class="s">" -&gt; published tweet successfully</span><span class="se">\n</span><span class="s">"</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">now</span><span class="o">.</span><span class="n">day</span><span class="p">)</span> <span class="o">+</span> <span class="s">"/"</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">now</span><span class="o">.</span><span class="n">month</span><span class="p">)</span> <span class="o">+</span> <span class="s">"/"</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">now</span><span class="o">.</span><span class="n">year</span><span class="p">)</span> <span class="o">+</span> <span class="s">" "</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">now</span><span class="o">.</span><span class="n">hour</span><span class="p">)</span> <span class="o">+</span> <span class="s">":"</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">now</span><span class="o">.</span><span class="n">minute</span><span class="p">)</span> <span class="o">+</span> <span class="s">":"</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">now</span><span class="o">.</span><span class="n">second</span><span class="p">)</span> <span class="o">+</span> <span class="s">" -&gt; failed to publish tweet</span><span class="se">\n</span><span class="s">"</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h1 id="step-4-providing-a-command-line-interface">Step 4: Providing a command-line interface</h1>
+
+<p>Argparse lets us create a command-line interface quickly, which can be useful for giving users a simple way to interact with a program. Rather than look for usage instructions in each file, they can get the inforamation they need – and access each feature – in one place.</p>
+
+<p>Too keep things simple, I chose to use <em>input</em> to let the user provide project names. There is no error-checking here, but if the user enters the wrong project name the function that is called will exit with a more or less appropriate error message. Input from users is saved to variables and then passed to functions.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#!/usr/bin/python</span>
+
+<span class="c">####</span>
+<span class="c">##</span>
+<span class="c">## tweetBooks.py: a command-line interface for downloading a text, parsing it into tweet-form and publishing the tweets</span>
+<span class="c">## Created by: Fredrik Walloe</span>
+<span class="c">## Creation date: 15-12-2018</span>
+<span class="c">## Version: 1.0</span>
+<span class="c">## Status: works fine with no known errors</span>
+<span class="c">##</span>
+<span class="c">## Usage: run tweetBooks.py -h for an overview of the available features </span>
+<span class="c">##</span>
+<span class="c">####</span>
+
+<span class="c">#### IMPORTS ####</span>
+<span class="kn">import</span> <span class="nn">argparse</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">from</span> <span class="nn">downloadBookByURL</span> <span class="kn">import</span> <span class="n">downloadByURL</span>
+<span class="kn">from</span> <span class="nn">fitTextInTweets</span> <span class="kn">import</span> <span class="n">fitTextToTweet</span>
+<span class="kn">from</span> <span class="nn">publishToTwitter</span> <span class="kn">import</span>  <span class="n">publishToTwitter</span>
+
+<span class="c">#### VARIABLES ####</span>
+<span class="n">debugMode</span> <span class="o">=</span> <span class="bp">False</span>
+
+<span class="c">#### FUNCTIONS ####</span>
+
+<span class="c"># prints text passed to it when debugMode is set to True</span>
+<span class="k">def</span> <span class="nf">debug</span><span class="p">(</span><span class="n">text</span><span class="p">):</span>
+   <span class="k">if</span> <span class="n">debugMode</span> <span class="ow">is</span> <span class="bp">True</span><span class="p">:</span>
+       <span class="k">print</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+
+<span class="c">#### MAIN ####</span>
+
+<span class="n">parser</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s">'Publish a Text Tweet-by-Tweet'</span><span class="p">)</span>
+
+<span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s">'-d'</span><span class="p">,</span> <span class="s">'--download'</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="s">'store_true'</span><span class="p">,</span> <span class="n">help</span> <span class="o">=</span> <span class="s">"Download a text"</span><span class="p">)</span>
+
+<span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s">'-f'</span><span class="p">,</span> <span class="s">'--fit'</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="s">'store_true'</span><span class="p">,</span> <span class="n">help</span> <span class="o">=</span> <span class="s">"Parse a text to make it fit a tweet"</span><span class="p">)</span>
+
+<span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s">'-p'</span><span class="p">,</span> <span class="s">'--publish'</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="s">'store_true'</span><span class="p">,</span> <span class="n">help</span> <span class="o">=</span> <span class="s">"Publish the next tweet"</span><span class="p">)</span>
+
+<span class="n">args</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">parse_args</span><span class="p">()</span>
+
+
+
+<span class="k">if</span> <span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">download</span><span class="p">):</span>
+    <span class="n">projectName</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s">"Choose a project name: "</span><span class="p">)</span>
+    <span class="n">URL</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s">"Provide URL that the text should be downloaded from: "</span><span class="p">)</span>
+
+    <span class="n">downloadByURL</span><span class="p">(</span><span class="n">projectName</span><span class="o">.</span><span class="n">strip</span><span class="p">(),</span> <span class="n">URL</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span>
+
+<span class="k">if</span> <span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">fit</span><span class="p">):</span>
+    <span class="n">projectName</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s">"Specify an existing project that should be parsed: "</span><span class="p">)</span>
+    <span class="n">hashtag</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s">"Choose a hashtag (without the #): "</span><span class="p">)</span>
+
+    <span class="n">filePath</span> <span class="o">=</span> <span class="n">projectName</span> <span class="o">+</span> <span class="s">"/"</span> <span class="o">+</span> <span class="n">projectName</span> <span class="o">+</span> <span class="s">".txt"</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">filePath</span><span class="p">)</span>
+    <span class="n">fitTextToTweet</span><span class="p">(</span><span class="n">filePath</span><span class="p">,</span> <span class="n">hashtag</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">publish</span><span class="p">):</span>
+    <span class="n">areCredentialsSet</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s">"Have you created a Buffer account and manually set Buffer credentials in publishToTwitter.py?</span><span class="se">\n</span><span class="s">1. Yes</span><span class="se">\n</span><span class="s">2. No</span><span class="se">\n</span><span class="s">"</span><span class="p">)</span> 
+    <span class="k">if</span> <span class="nb">str</span><span class="p">(</span><span class="s">"1"</span><span class="p">)</span> <span class="ow">in</span> <span class="n">areCredentialsSet</span><span class="p">:</span>
+        <span class="n">projectName</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s">"Specify the name of an existing project to publish the next pending tweet for that project: "</span><span class="p">)</span>
+        <span class="n">publishToTwitter</span><span class="p">(</span><span class="n">projectName</span><span class="p">)</span>
+
+    <span class="k">else</span><span class="p">:</span> 
+        <span class="k">print</span><span class="p">(</span><span class="s">"Sort that out first and then come back here"</span><span class="p">)</span>
+        <span class="n">sys</span><span class="o">.</span><span class="nb">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h1 id="step-5-why-not-use-cron">Step 5: Why not use cron?</h1>
+
+<p>The downside of an interactive command-line interface that relies on interactive user input is that this makes it trickier to run the program as a cron job.</p>
+
+<p>As a simple fix to this, <em>publishFromCron.py</em> will run the publishToTwitter function with a project name passed as argument through sys.argv[].</p>
+
+<p>This means that a Moby Dick project named MobyDick can be called from the command line like this:</p>
+
+<p><em>./publishFromCron.py MobyDick</em></p>
+
+<p>A cron job that runs every hour would look something like this:</p>
+
+<p>0 * * * * fredrik /home/fredrik/letspretendthisiswhereikeepmyscripts/tweetBooks/publishFromCron.py Moby Dick</p>
+
+<p>Only 4 lines of this scripts are relevant:</p>
+<ol>
+  <li>#!/usr/bin/python</li>
+  <li>import sys</li>
+  <li>from publishToTwitter import  publishToTwitter</li>
+  <li>publishToTwitter(sys.argv[1])</li>
+</ol>
+
+<p>But I publish it in full here in case this is read by someone who is unfamiliar with Python and wants to see the whole thing; partial code examples can be annoying when you’re just starting out.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#!/usr/bin/python</span>
+
+<span class="c">####</span>
+<span class="c">##</span>
+<span class="c">## publishFromCron.py: publish a project by specifying the project name as a sys.argv argument; cron-friendly</span>
+<span class="c">## Created by: Fredrik Walloe</span>
+<span class="c">## Creation date: 15-12-2018</span>
+<span class="c">## Version: 1</span>
+<span class="c">## Status: works fine without known errors</span>
+<span class="c">##</span>
+<span class="c">## Usage: ./publishFromCron.py someProjectNameInOneWord</span>
+<span class="c">##</span>
+<span class="c">####</span>
+
+<span class="c">#### IMPORTS ####</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">from</span> <span class="nn">publishToTwitter</span> <span class="kn">import</span>  <span class="n">publishToTwitter</span>
+
+<span class="c">#### VARIABLES ####</span>
+<span class="n">debugMode</span> <span class="o">=</span> <span class="bp">False</span>
+
+<span class="c">#### FUNCTIONS ####</span>
+
+<span class="c"># prints text passed to it when debugMode is set to True</span>
+<span class="k">def</span> <span class="nf">debug</span><span class="p">(</span><span class="n">text</span><span class="p">):</span>
+   <span class="k">if</span> <span class="n">debugMode</span> <span class="ow">is</span> <span class="bp">True</span><span class="p">:</span>
+       <span class="k">print</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+
+<span class="c">#### MAIN ####</span>
+<span class="n">publishToTwitter</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+</code></pre></div></div>
+
+<h1 id="conclusion">Conclusion</h1>
+
+<p>Although tweetBooks is not a particularly complicated project it was nonetheless fun to put it together. I may return to it if I need to publish a long text on Twitter for some reason, but until then I hope this write-up can serve as a useful jump-off point for folks who want to use the Buffer API, or who are curious about Python and want a simple example of how it can be used to do practical things.</p>
+
+                </div>
+            </section>
+
+            <!-- Email subscribe form at the bottom of the page -->
+
+            
+
+            <footer class="post-full-footer">
+                <!-- Everything inside the #author tags pulls data from the author -->
+                <!-- #author-->
+                
+                    
+                        <section class="author-card">
+                            
+                                <img class="author-profile-image" src="/assets/images/fwalloeProfilePicture.jpg" alt="fwalloe" />
+                            
+                            <section class="author-card-content">
+                                <h4 class="author-card-name"><a href="/author/fwalloe">Fredrik Walløe</a></h4>
+                                
+                                    <p>Fredrik is a Security Intelligence Analyst and sometimes journalist who likes to write and explore unknown streets with a camera in hand.</p>
+                                
+                            </section>
+                        </section>
+                        <div class="post-full-footer-right">
+                            <a class="author-card-button" href="/author/fwalloe">Read More</a>
+                        </div>
+                    
+                
+                <!-- /author  -->
+            </footer>
+
+            <!-- If you use Disqus comments, just uncomment this block.
+            The only thing you need to change is "test-apkdzgmqhj" - which
+            should be replaced with your own Disqus site-id. -->
+            
+
+        </article>
+
+    </div>
+</main>
+
+<!-- Links to Previous/Next posts -->
+<aside class="read-next outer">
+    <div class="inner">
+        <div class="read-next-feed">
+            
+                
+                
+                
+                
+                    <article class="read-next-card"
+                        
+                            style="background-image: url(/assets/images/blog-cover.jpg)"
+                        
+                    >
+                        <header class="read-next-card-header">
+                            <small class="read-next-card-header-sitetitle">&mdash; Fredrik Walløe &mdash;</small>
+                            
+                                <h3 class="read-next-card-header-title"><a href="/tag/infosec/">Infosec</a></h3>
+                            
+                        </header>
+                        <div class="read-next-divider"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 14.5s2 3 5 3 5.5-2.463 5.5-5.5S21 6.5 18 6.5c-5 0-7 11-12 11C2.962 17.5.5 15.037.5 12S3 6.5 6 6.5s4.5 3.5 4.5 3.5"/></svg>
+</div>
+                        <div class="read-next-card-content">
+                            <ul>
+                                
+                                
+                                  
+                                    
+                                  
+                                
+                                  
+                                    
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                            <li><a href="/This-Week-in-InfoSec-Week-36-2018">This Week in InfoSec – Week 36 – 2018</a></li>
+                                        
+                                    
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                            <li><a href="/about-infosec">What do you mean I can't hack that?</a></li>
+                                        
+                                    
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                            <li><a href="/The-Norwegian-Computer-Crime-and-Data-Breach-Survey-2016">The Norwegian Computer Crime and Data Breach Survey 2016</a></li>
+                                        
+                                    
+                                  
+                                
+                                  
+                                
+                            </ul>
+                        </div>
+                        <footer class="read-next-card-footer">
+                            <a href="/tag/infosec/">
+                                
+                                    See all 4 posts  →
+                                
+                            </a>
+                        </footer>
+                    </article>
+                
+            
+
+            <!-- If there's a next post, display it using the same markup included from - partials/post-card.hbs -->
+            
+                
+    <article class="post-card post-template">
+        
+            <a class="post-card-image-link" href="/How-To-Tell-a-Story-Tweet-by-Tweet-using-Python">
+                <div class="post-card-image" style="background-image: url(/assets/images/general/stackOfBooks.jpg)"></div>
+            </a>
+        
+        <div class="post-card-content">
+            <a class="post-card-content-link" href="/How-To-Tell-a-Story-Tweet-by-Tweet-using-Python">
+                <header class="post-card-header">
+                    
+                        
+                            
+                                <span class="post-card-tags">Infosec</span>
+                            
+                        
+                    
+
+                    <h2 class="post-card-title">HOW TO Tell a Story Tweet by Tweet using Python</h2>
+                </header>
+                <section class="post-card-excerpt">
+                    <p>I got curious the other day about whether it would be tricky to parse a long text into tweet-form and automatically publish it to Twitter every hour. The answer turned out to be</p>
+                </section>
+            </a>
+            <footer class="post-card-meta">
+                
+                    
+                        
+                        <img class="author-profile-image" src="/assets/images/fwalloeProfilePicture.jpg" alt="Fredrik Walløe" />
+                        
+                        <span class="post-card-author">
+                            <a href="/author/fwalloe/">Fredrik Walløe</a>
+                        </span>
+                    
+                
+            </footer>
+        </div>
+    </article>
+
+            
+
+            <!-- If there's a previous post, display it using the same markup included from - partials/post-card.hbs -->
+            
+                
+    <article class="post-card post-template">
+        
+            <a class="post-card-image-link" href="/Cross-continental-road-trips-with-Google-Street-View">
+                <div class="post-card-image" style="background-image: url(/assets/images/journalism/~/Dropbox/blog/fwalloeBlog/assets/images/journalism/default.jpg)"></div>
+            </a>
+        
+        <div class="post-card-content">
+            <a class="post-card-content-link" href="/Cross-continental-road-trips-with-Google-Street-View">
+                <header class="post-card-header">
+                    
+                        
+                            
+                                <span class="post-card-tags">Journalismtravel</span>
+                            
+                        
+                    
+
+                    <h2 class="post-card-title">Cross-continental road trips with Google Street View</h2>
+                </header>
+                <section class="post-card-excerpt">
+                    <p>If you hop in a car in Stavanger – the former fishing town gone oil-capitol of Norway – and forsake sleep to keep your foot on the pedal you can get to Cape-Town in 210</p>
+                </section>
+            </a>
+            <footer class="post-card-meta">
+                
+                    
+                        
+                        <img class="author-profile-image" src="/assets/images/fwalloeProfilePicture.jpg" alt="Fredrik Walløe" />
+                        
+                        <span class="post-card-author">
+                            <a href="/author/fwalloe/">Fredrik Walløe</a>
+                        </span>
+                    
+                
+            </footer>
+        </div>
+    </article>
+
+            
+
+        </div>
+    </div>
+</aside>
+
+<!-- Floating header which appears on-scroll, included from includes/floating-header.hbs -->
+<div class="floating-header">
+    <div class="floating-header-logo">
+        <a href="/">
+
+            <!-- ADDS LOGO  
+            
+                <img src="/assets/images/favicon.png" alt="Fredrik Walløe icon" />
+            
+            -->
+            <span>Fredrik Walløe</span>
+        </a>
+    </div>
+    <span class="floating-header-divider">&mdash;</span>
+    <div class="floating-header-title">HOW TO Tell a Story Tweet by Tweet using Python</div>
+    <div class="floating-header-share">
+        <div class="floating-header-share-label"></div>
+        <a class="floating-header-share-tw" href="https://twitter.com/share?text=HOW+TO+Tell+a+Story+Tweet+by+Tweet+using+Python&amp;url=https://blog.fredrikwalloe.com/HOW-TO-Tell-a-Story-Tweet-by-Tweet-using-Python"
+            onclick="window.open(this.href, 'share-twitter', 'width=550,height=235');return false;">
+            <svg xmlns="https://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M30.063 7.313c-.813 1.125-1.75 2.125-2.875 2.938v.75c0 1.563-.188 3.125-.688 4.625a15.088 15.088 0 0 1-2.063 4.438c-.875 1.438-2 2.688-3.25 3.813a15.015 15.015 0 0 1-4.625 2.563c-1.813.688-3.75 1-5.75 1-3.25 0-6.188-.875-8.875-2.625.438.063.875.125 1.375.125 2.688 0 5.063-.875 7.188-2.5-1.25 0-2.375-.375-3.375-1.125s-1.688-1.688-2.063-2.875c.438.063.813.125 1.125.125.5 0 1-.063 1.5-.25-1.313-.25-2.438-.938-3.313-1.938a5.673 5.673 0 0 1-1.313-3.688v-.063c.813.438 1.688.688 2.625.688a5.228 5.228 0 0 1-1.875-2c-.5-.875-.688-1.813-.688-2.75 0-1.063.25-2.063.75-2.938 1.438 1.75 3.188 3.188 5.25 4.25s4.313 1.688 6.688 1.813a5.579 5.579 0 0 1 1.5-5.438c1.125-1.125 2.5-1.688 4.125-1.688s3.063.625 4.188 1.813a11.48 11.48 0 0 0 3.688-1.375c-.438 1.375-1.313 2.438-2.563 3.188 1.125-.125 2.188-.438 3.313-.875z"/></svg>
+
+        </a>
+        <a class="floating-header-share-fb" href="https://www.facebook.com/sharer/sharer.php?u=https://blog.fredrikwalloe.com/HOW-TO-Tell-a-Story-Tweet-by-Tweet-using-Python"
+            onclick="window.open(this.href, 'share-facebook','width=580,height=296');return false;">
+            <svg xmlns="https://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M19 6h5V0h-5c-3.86 0-7 3.14-7 7v3H8v6h4v16h6V16h5l1-6h-6V7c0-.542.458-1 1-1z"/></svg>
+
+        </a>
+    </div>
+    <progress class="progress" value="0">
+        <div class="progress-container">
+            <span class="progress-bar"></span>
+        </div>
+    </progress>
+</div>
+
+
+<!-- /post -->
+
+<!-- The #contentFor helper here will send everything inside it up to the matching #block helper found in default.hbs -->
+
+
+        <!-- Previous/next page links - displayed on every page -->
+        
+
+        <!-- The footer at the very bottom of the screen -->
+        <footer class="site-footer outer">
+            <div class="site-footer-content inner">
+                <section class="copyright"><a href="/">Fredrik Walløe</a> &copy; 2018</section>
+               
+                <nav class="site-footer-nav">
+                    <a href="/">Latest Posts</a>
+                    <a href="https://facebook.com/Journalist.Fredrik.Walloe" target="_blank" rel="noopener">Facebook</a>
+                    <a href="https://twitter.com/fwalloe" target="_blank" rel="noopener">Twitter</a>
+          
+                </nav>
+            </div>
+        </footer>
+
+    </div>
+
+    <!-- The big email subscribe modal content -->
+    
+
+    <!-- highlight.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.10.0/components/prism-abap.min.js"></script>
+    <script>$(document).ready(function() {
+      $('pre code').each(function(i, block) {
+        hljs.highlightBlock(block);
+      });
+    });</script>
+
+    <!-- jQuery + Fitvids, which makes all video embeds responsive -->
+    <script
+        src="https://code.jquery.com/jquery-3.2.1.min.js"
+        integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+        crossorigin="anonymous">
+    </script>
+    <script type="text/javascript" src="/assets/js/jquery.fitvids.js"></script>
+    <script type="text/javascript" src="https://demo.ghost.io/assets/js/jquery.fitvids.js?v=724281a32e"></script>
+
+
+    <!-- Paginator increased to "infinit" in _config.yml -->
+    <!-- if paginator.posts  -->
+    <!-- <script>
+        var maxPages = parseInt('');
+    </script>
+    <script src="/assets/js/infinitescroll.js"></script> -->
+    <!-- /endif -->
+
+    
+
+
+    <!-- Add Google Analytics  -->
+    <!-- Google Analytics Tracking code -->
+ <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-25501942-2', 'auto');
+  ga('send', 'pageview');
+
+ </script>
+
+
+    <!-- The #block helper will pull in data from the #contentFor other template files. In this case, there's some JavaScript which we only want to use in post.hbs, but it needs to be included down here, after jQuery has already loaded. -->
+    
+        <script>
+
+// NOTE: Scroll performance is poor in Safari
+// - this appears to be due to the events firing much more slowly in Safari.
+//   Dropping the scroll event and using only a raf loop results in smoother
+//   scrolling but continuous processing even when not scrolling
+$(document).ready(function () {
+    // Start fitVids
+    var $postContent = $(".post-full-content");
+    $postContent.fitVids();
+    // End fitVids
+
+    var progressBar = document.querySelector('progress');
+    var header = document.querySelector('.floating-header');
+    var title = document.querySelector('.post-full-title');
+
+    var lastScrollY = window.scrollY;
+    var lastWindowHeight = window.innerHeight;
+    var lastDocumentHeight = $(document).height();
+    var ticking = false;
+
+    function onScroll() {
+        lastScrollY = window.scrollY;
+        requestTick();
+    }
+
+    function onResize() {
+        lastWindowHeight = window.innerHeight;
+        lastDocumentHeight = $(document).height();
+        requestTick();
+    }
+
+    function requestTick() {
+        if (!ticking) {
+            requestAnimationFrame(update);
+        }
+        ticking = true;
+    }
+
+    function update() {
+        var trigger = title.getBoundingClientRect().top + window.scrollY;
+        var triggerOffset = title.offsetHeight + 35;
+        var progressMax = lastDocumentHeight - lastWindowHeight;
+
+        // show/hide floating header
+        if (lastScrollY >= trigger + triggerOffset) {
+            header.classList.add('floating-active');
+        } else {
+            header.classList.remove('floating-active');
+        }
+
+        progressBar.setAttribute('max', progressMax);
+        progressBar.setAttribute('value', lastScrollY);
+
+        ticking = false;
+    }
+
+    window.addEventListener('scroll', onScroll, {passive: true});
+    window.addEventListener('resize', onResize, false);
+
+    update();
+});
+</script>
+
+    
+
+    <!-- Ghost outputs important scripts and data with this tag - it should always be the very last thing before the closing body tag -->
+    <!-- ghost_foot -->
+
+</body>
+</html>
