@@ -284,9 +284,11 @@ into the {body} of the default.hbs template -->
 <span class="k">def</span> <span class="nf">fitTextToTweet</span><span class="p">(</span><span class="n">filePath</span><span class="p">,</span> <span class="n">hashtag</span><span class="p">):</span>
 
     <span class="k">try</span><span class="p">:</span>   
-        <span class="n">text</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">filePath</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s">"/"</span><span class="p">,</span> <span class="s">"/unparsed"</span><span class="p">),</span> <span class="s">"r"</span><span class="p">)</span>        <span class="c"># the unparsed text was downloaded to a file located in projectName/unparsedProjectName</span>
+        <span class="c"># the unparsed text was downloaded to a file located in projectName/unparsedProjectName</span>
+        <span class="n">text</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">filePath</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s">"/"</span><span class="p">,</span> <span class="s">"/unparsed"</span><span class="p">),</span> <span class="s">"r"</span><span class="p">)</span>       
     <span class="k">except</span><span class="p">:</span>
-        <span class="k">print</span><span class="p">(</span><span class="s">"Unable to open project file. Make sure you specified an existing project or use the --download option to create a new project. Project names are case-sensitive"</span><span class="p">)</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">"Unable to open project file. Make sure you specified an existing project</span><span class="se">\
+</span><span class="s">        or use the --download option to create a new project. Project names are case-sensitive"</span><span class="p">)</span>
         <span class="n">sys</span><span class="o">.</span><span class="nb">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
 
     <span class="n">tweets</span> <span class="o">=</span> <span class="p">[]</span>             <span class="c"># save tweets to a list</span>
@@ -309,9 +311,11 @@ into the {body} of the default.hbs template -->
 
             <span class="c"># if it's longer than 120 characters it's neccessary to manipulate it to make it fit a tweet</span>
             <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">line</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">120</span><span class="p">:</span>
-                        
-                <span class="c"># see if it's enough to cut one word</span>
-                <span class="k">while</span> <span class="nb">len</span><span class="p">(</span><span class="n">line</span><span class="p">)</span> <span class="o">&gt;</span> <span class="p">(</span><span class="mi">140</span> <span class="o">-</span> <span class="nb">len</span><span class="p">(</span><span class="n">hashtag</span><span class="p">)</span> <span class="o">-</span> <span class="nb">len</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span> <span class="o">-</span> <span class="nb">len</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">))):</span>    <span class="c"># to figure out how many characters we can fit into a tweet we must take the max tweet length of 140 characters, minus the hashtag, tweet number and the three charactes used to encapsulate the tweet number</span>
+             
+
+                <span class="c"># to figure out how many characters we can fit into a tweet we must take the max tweet length of 140 characters, </span>
+                <span class="c"># minus the hashtag, tweet number and the three charactes used to encapsulate the tweet number</span>
+                <span class="k">while</span> <span class="nb">len</span><span class="p">(</span><span class="n">line</span><span class="p">)</span> <span class="o">&gt;</span> <span class="p">(</span><span class="mi">140</span> <span class="o">-</span> <span class="nb">len</span><span class="p">(</span><span class="n">hashtag</span><span class="p">)</span> <span class="o">-</span> <span class="nb">len</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span> <span class="o">-</span> <span class="nb">len</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">))):</span>    
                     
                     <span class="c"># Save the last word</span>
                     <span class="n">lastLine</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">rsplit</span><span class="p">(</span><span class="s">' '</span><span class="p">,</span> <span class="mi">1</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="s">" "</span> <span class="o">+</span> <span class="n">lastLine</span>    
@@ -389,7 +393,7 @@ into the {body} of the default.hbs template -->
 <span class="n">clientID</span> <span class="o">=</span> <span class="s">""</span>                       <span class="c"># Buffer client ID, which can be found under 'registered apps' after you create an application</span>
 <span class="n">clientSecret</span> <span class="o">=</span> <span class="s">""</span>                   <span class="c"># Buffer client Secret, which will be sent by email after you create an application</span>
 <span class="n">redirectURI</span> <span class="o">=</span> <span class="s">""</span>                    <span class="c"># Buffer redirect, which can be found under 'registered apps' after you create an application; a default redirect was used here</span>
-<span class="n">bufferToken</span> <span class="o">=</span> <span class="s">""</span>                    <span class="c"># Buffer Token, which can be found under 'registered apps' after you create an application; if you need more than one a separate authentication process is required          </span>
+<span class="n">bufferToken</span> <span class="o">=</span> <span class="s">""</span>                    <span class="c"># Buffer Token, which can be found under 'registered apps' after you create an application         </span>
 <span class="n">bufferProfileID</span> <span class="o">=</span> <span class="s">""</span>                <span class="c"># Can be found in the URL when you navigate to your Buffer profile</span>
 
 <span class="c">#### FUNCTIONS d####</span>
@@ -410,7 +414,9 @@ into the {body} of the default.hbs template -->
     <span class="k">try</span><span class="p">:</span>
         <span class="n">getTweet</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">projectName</span> <span class="o">+</span> <span class="s">"/"</span> <span class="o">+</span> <span class="n">projectName</span> <span class="o">+</span> <span class="s">".txt"</span><span class="p">,</span> <span class="s">"r"</span><span class="p">)</span>
     <span class="k">except</span><span class="p">:</span> 
-        <span class="k">print</span><span class="p">(</span><span class="s">"Failed to open file that should contain the parsed tweets for this project. If you have not yet used to --download and --fit options, use those first and then try this option again. If yout've already run those options, verify that you entered the correct project name (note that project names are case-sensitive."</span><span class="p">)</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">"Failed to open file that should contain the parsed tweets for this project. If you have not yet used to</span><span class="se">\
+</span><span class="s">         --download and --fit options, use those first and then try this option again. If yout've already run those</span><span class="se">\
+</span><span class="s">         options, verify that you entered the correct project name (note that project names are case-sensitive."</span><span class="p">)</span>
         <span class="n">sys</span><span class="o">.</span><span class="nb">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
 
     <span class="c"># loop through each of the prepared tweets </span>
@@ -429,7 +435,8 @@ into the {body} of the default.hbs template -->
                 <span class="k">break</span>
 
     <span class="s">"""
-        Buffer requires you to a) create an account b) create an application, c) get a token (requires a separate GET request if you need more than one) and d) the information below supplied as data in the POST request: 
+        Buffer requires you to a) create an account b) create an application, c) get a token (requires a separate 
+        GET request if you need more than one) and d) the information below supplied as data in the POST request: 
         - a profile ID (found in the URL on your Buffer profile)
         - the text that should be shared; a tweet in this case
         - 'now' is optional and means that the tweet will be shared immediately
@@ -460,7 +467,8 @@ into the {body} of the default.hbs template -->
     <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">projectName</span> <span class="o">+</span> <span class="s">"/lineReached"</span><span class="p">,</span> <span class="s">"w"</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
         <span class="c"># only update lineReached if the attempt to publish the tweet succeeded </span>
         <span class="k">if</span> <span class="nb">str</span><span class="p">(</span><span class="mi">200</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">str</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">):</span>
-            <span class="n">lineReached</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">lineReached</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>                <span class="c"># because the tweet was published the last reach tweet value should increment by one</span>
+            <span class="c"># because the tweet was published the last reach tweet value should increment by one</span>
+            <span class="n">lineReached</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">lineReached</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>                
             <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">lineReached</span><span class="p">))</span>
 
 
@@ -469,9 +477,11 @@ into the {body} of the default.hbs template -->
         <span class="n">now</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span>
         <span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">)</span>
         <span class="k">if</span> <span class="nb">str</span><span class="p">(</span><span class="mi">200</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">str</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">):</span>
-            <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">now</span><span class="o">.</span><span class="n">day</span><span class="p">)</span> <span class="o">+</span> <span class="s">"/"</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">now</span><span class="o">.</span><span class="n">month</span><span class="p">)</span> <span class="o">+</span> <span class="s">"/"</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">now</span><span class="o">.</span><span class="n">year</span><span class="p">)</span> <span class="o">+</span> <span class="s">" "</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">now</span><span class="o">.</span><span class="n">hour</span><span class="p">)</span> <span class="o">+</span> <span class="s">":"</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">now</span><span class="o">.</span><span class="n">minute</span><span class="p">)</span> <span class="o">+</span> <span class="s">":"</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">now</span><span class="o">.</span><span class="n">second</span><span class="p">)</span> <span class="o">+</span> <span class="s">" -&gt; published tweet successfully</span><span class="se">\n</span><span class="s">"</span><span class="p">)</span>
+            <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">now</span><span class="o">.</span><span class="n">day</span><span class="p">)</span> <span class="o">+</span> <span class="s">"/"</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">now</span><span class="o">.</span><span class="n">month</span><span class="p">)</span> <span class="o">+</span> <span class="s">"/"</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">now</span><span class="o">.</span><span class="n">year</span><span class="p">)</span> <span class="o">+</span> <span class="s">" "</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">now</span><span class="o">.</span><span class="n">hour</span><span class="p">)</span> <span class="o">+</span> 
+            <span class="s">":"</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">now</span><span class="o">.</span><span class="n">minute</span><span class="p">)</span> <span class="o">+</span> <span class="s">":"</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">now</span><span class="o">.</span><span class="n">second</span><span class="p">)</span> <span class="o">+</span> <span class="s">" -&gt; published tweet successfully</span><span class="se">\n</span><span class="s">"</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">now</span><span class="o">.</span><span class="n">day</span><span class="p">)</span> <span class="o">+</span> <span class="s">"/"</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">now</span><span class="o">.</span><span class="n">month</span><span class="p">)</span> <span class="o">+</span> <span class="s">"/"</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">now</span><span class="o">.</span><span class="n">year</span><span class="p">)</span> <span class="o">+</span> <span class="s">" "</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">now</span><span class="o">.</span><span class="n">hour</span><span class="p">)</span> <span class="o">+</span> <span class="s">":"</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">now</span><span class="o">.</span><span class="n">minute</span><span class="p">)</span> <span class="o">+</span> <span class="s">":"</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">now</span><span class="o">.</span><span class="n">second</span><span class="p">)</span> <span class="o">+</span> <span class="s">" -&gt; failed to publish tweet</span><span class="se">\n</span><span class="s">"</span><span class="p">)</span>
+            <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">now</span><span class="o">.</span><span class="n">day</span><span class="p">)</span> <span class="o">+</span> <span class="s">"/"</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">now</span><span class="o">.</span><span class="n">month</span><span class="p">)</span> <span class="o">+</span> <span class="s">"/"</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">now</span><span class="o">.</span><span class="n">year</span><span class="p">)</span> <span class="o">+</span> <span class="s">" "</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">now</span><span class="o">.</span><span class="n">hour</span><span class="p">)</span> <span class="o">+</span> 
+            <span class="s">":"</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">now</span><span class="o">.</span><span class="n">minute</span><span class="p">)</span> <span class="o">+</span> <span class="s">":"</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">now</span><span class="o">.</span><span class="n">second</span><span class="p">)</span> <span class="o">+</span> <span class="s">" -&gt; failed to publish tweet</span><span class="se">\n</span><span class="s">"</span><span class="p">)</span>
 </code></pre></div></div>
 
 <h1 id="step-4-providing-a-command-line-interface">Step 4: Providing a command-line interface</h1>
@@ -540,7 +550,8 @@ into the {body} of the default.hbs template -->
     <span class="n">fitTextToTweet</span><span class="p">(</span><span class="n">filePath</span><span class="p">,</span> <span class="n">hashtag</span><span class="p">)</span>
 
 <span class="k">if</span> <span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">publish</span><span class="p">):</span>
-    <span class="n">areCredentialsSet</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s">"Have you created a Buffer account and manually set Buffer credentials in publishToTwitter.py?</span><span class="se">\n</span><span class="s">1. Yes</span><span class="se">\n</span><span class="s">2. No</span><span class="se">\n</span><span class="s">"</span><span class="p">)</span> 
+    <span class="n">areCredentialsSet</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s">"Have you created a Buffer account and manually</span><span class="se">\
+</span><span class="s">                        set Buffer credentials in publishToTwitter.py?</span><span class="se">\n</span><span class="s">1. Yes</span><span class="se">\n</span><span class="s">2. No</span><span class="se">\n</span><span class="s">"</span><span class="p">)</span> 
     <span class="k">if</span> <span class="nb">str</span><span class="p">(</span><span class="s">"1"</span><span class="p">)</span> <span class="ow">in</span> <span class="n">areCredentialsSet</span><span class="p">:</span>
         <span class="n">projectName</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s">"Specify the name of an existing project to publish the next pending tweet for that project: "</span><span class="p">)</span>
         <span class="n">publishToTwitter</span><span class="p">(</span><span class="n">projectName</span><span class="p">)</span>
@@ -602,7 +613,7 @@ into the {body} of the default.hbs template -->
    <span class="k">if</span> <span class="n">debugMode</span> <span class="ow">is</span> <span class="bp">True</span><span class="p">:</span>
        <span class="k">print</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
 
-<span class="c">#### MAIN ####</span>
+
 <span class="n">publishToTwitter</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
 </code></pre></div></div>
 
@@ -682,10 +693,6 @@ into the {body} of the default.hbs template -->
                                   
                                 
                                   
-                                    
-                                  
-                                
-                                  
                                 
                                   
                                 
@@ -729,7 +736,7 @@ into the {body} of the default.hbs template -->
                         <footer class="read-next-card-footer">
                             <a href="/tag/infosec/">
                                 
-                                    See all 4 posts  →
+                                    See all 3 posts  →
                                 
                             </a>
                         </footer>
@@ -738,46 +745,6 @@ into the {body} of the default.hbs template -->
             
 
             <!-- If there's a next post, display it using the same markup included from - partials/post-card.hbs -->
-            
-                
-    <article class="post-card post-template">
-        
-            <a class="post-card-image-link" href="/How-To-Tell-a-Story-Tweet-by-Tweet-using-Python">
-                <div class="post-card-image" style="background-image: url(/assets/images/general/stackOfBooks.jpg)"></div>
-            </a>
-        
-        <div class="post-card-content">
-            <a class="post-card-content-link" href="/How-To-Tell-a-Story-Tweet-by-Tweet-using-Python">
-                <header class="post-card-header">
-                    
-                        
-                            
-                                <span class="post-card-tags">Infosec</span>
-                            
-                        
-                    
-
-                    <h2 class="post-card-title">HOW TO Tell a Story Tweet by Tweet using Python</h2>
-                </header>
-                <section class="post-card-excerpt">
-                    <p>I got curious the other day about whether it would be tricky to parse a long text into tweet-form and automatically publish it to Twitter every hour. The answer turned out to be</p>
-                </section>
-            </a>
-            <footer class="post-card-meta">
-                
-                    
-                        
-                        <img class="author-profile-image" src="/assets/images/fwalloeProfilePicture.jpg" alt="Fredrik Walløe" />
-                        
-                        <span class="post-card-author">
-                            <a href="/author/fwalloe/">Fredrik Walløe</a>
-                        </span>
-                    
-                
-            </footer>
-        </div>
-    </article>
-
             
 
             <!-- If there's a previous post, display it using the same markup included from - partials/post-card.hbs -->
